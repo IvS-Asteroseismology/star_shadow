@@ -968,7 +968,12 @@ def find_orbital_period(times, signal, f_n):
     # if there are very high numbers, add double that fraction for testing
     test_frac = h_measure_m / h_measure[mask_peak][i_min_dist]
     if np.any(test_frac[2:] > 3):
+<<<<<<< HEAD
         p_multiples = np.append(p_multiples, [p_orb * 2 * n_multiply[2:][test_frac[2:] > 3]])
+=======
+        n_multiply = np.append(n_multiply, [2 * n_multiply[2:][test_frac[2:] > 3]])
+        p_multiples = p_orb * n_multiply
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
         n_harm_r_m, completeness_r_m, distance_r_m = af.harmonic_series_length(1/p_multiples, f_n, freq_res, f_nyquist)
         h_measure_m = n_harm_r_m * completeness_r_m  # compute h_measure for constraining a domain
     # compute diagnostic fractions that need to meet some threshold
@@ -2080,7 +2085,11 @@ def extract_single_narrow(times, signal, f0=0, fn=0, verbose=True):
     return f_final, a_final, ph_final
 
 
+<<<<<<< HEAD
 def refine_subset(times, signal, close_f, p_orb, const, slope, f_n, a_n, ph_n, i_sectors, bic_thr=2, verbose=True):
+=======
+def refine_subset(times, signal, close_f, p_orb, const, slope, f_n, a_n, ph_n, i_sectors, verbose=True):
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     """Refine a subset of frequencies that are within the Rayleigh criterion of each other,
     taking into account (and not changing the frequencies of) harmonics if present.
     
@@ -2189,7 +2198,11 @@ def refine_subset(times, signal, close_f, p_orb, const, slope, f_n, a_n, ph_n, i
     return const, slope, f_n, a_n, ph_n
 
 
+<<<<<<< HEAD
 def extract_sinusoids(times, signal, i_sectors, p_orb=0, f_n=None, a_n=None, ph_n=None, select='hybrid', bic_thr=2,
+=======
+def extract_sinusoids(times, signal, i_sectors, p_orb=0, f_n=None, a_n=None, ph_n=None, select='hybrid',
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
                       verbose=True):
     """Extract all the frequencies from a periodic signal.
 
@@ -2304,7 +2317,11 @@ def extract_sinusoids(times, signal, i_sectors, p_orb=0, f_n=None, a_n=None, ph_
         model_sinusoid_r -= sum_sines(times, np.array([f_i]), np.array([a_i]), np.array([ph_i]))
         if (len(close_f) > 1):
             refine_out = refine_subset(times, signal, close_f, p_orb, const, slope, f_n_temp, a_n_temp, ph_n_temp,
+<<<<<<< HEAD
                                        i_sectors, bic_thr=bic_thr, verbose=verbose)
+=======
+                                       i_sectors, verbose=verbose)
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
             const, slope, f_n_temp, a_n_temp, ph_n_temp = refine_out
         # as a last model-refining step, redetermine the constant and slope
         model_sinusoid_n = sum_sines(times, f_n_temp[close_f], a_n_temp[close_f], ph_n_temp[close_f])
@@ -2315,7 +2332,11 @@ def extract_sinusoids(times, signal, i_sectors, p_orb=0, f_n=None, a_n=None, ph_
         n_param = 2 * n_sectors + 1 * (n_harm > 0) + 2 * n_harm + 3 * (n_freq_cur + 1 - n_harm)
         bic = calc_bic(resid, n_param)
         d_bic = bic_prev - bic
+<<<<<<< HEAD
         if (np.round(d_bic, 2) > bic_thr):
+=======
+        if (np.round(d_bic, 2) > 2):
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
             # accept the new frequency
             f_n, a_n, ph_n = np.append(f_n, f_i), np.append(a_n, a_i), np.append(ph_n, ph_i)
             # adjust the shifted frequencies
@@ -2332,7 +2353,11 @@ def extract_sinusoids(times, signal, i_sectors, p_orb=0, f_n=None, a_n=None, ph_
     return const, slope, f_n, a_n, ph_n
 
 
+<<<<<<< HEAD
 def extract_harmonics(times, signal, p_orb, i_sectors, f_n=None, a_n=None, ph_n=None, bic_thr=2, verbose=True):
+=======
+def extract_harmonics(times, signal, p_orb, i_sectors, f_n=None, a_n=None, ph_n=None, verbose=True):
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     """Tries to extract more harmonics from the signal
     
     Parameters
@@ -2425,7 +2450,11 @@ def extract_harmonics(times, signal, p_orb, i_sectors, f_n=None, a_n=None, ph_n=
         n_param = 2 * n_sectors + 1 * (n_harm_cur > 0) + 2 * n_harm_cur + 3 * (n_freq - n_harm)
         bic = calc_bic(resid, n_param)
         d_bic = bic_prev - bic
+<<<<<<< HEAD
         if (np.round(d_bic, 2) > bic_thr):
+=======
+        if (np.round(d_bic, 2) > 2):
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
             # h_c is accepted, add it to the final list and continue
             bic_prev = bic
             f_n, a_n, ph_n = np.append(f_n, f_c), np.append(a_n, a_c), np.append(ph_n, ph_c)
@@ -2859,7 +2888,11 @@ def reduce_frequencies(times, signal, p_orb, const, slope, f_n, a_n, ph_n, i_sec
     return const, slope, f_n, a_n, ph_n
 
 
+<<<<<<< HEAD
 def select_frequencies(times, signal, p_orb, const, slope, f_n, a_n, ph_n, i_sectors, sn_thr, verbose=False):
+=======
+def select_frequencies(times, signal, p_orb, const, slope, f_n, a_n, ph_n, i_sectors, verbose=False):
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     """Selects the credible frequencies from the given set
     
     Parameters
@@ -2922,7 +2955,11 @@ def select_frequencies(times, signal, p_orb, const, slope, f_n, a_n, ph_n, i_sec
     remove_sigma = af.remove_insignificant_sigma(f_n, f_n_err, a_n, a_n_err, sigma_a=3, sigma_f=3)
     # apply the signal-to-noise threshold
     noise_at_f = scargle_noise_at_freq(f_n, times, residuals, window_width=1.0)
+<<<<<<< HEAD
     remove_snr = af.remove_insignificant_snr(a_n, noise_at_f, times, sn_thr)
+=======
+    remove_snr = af.remove_insignificant_snr(a_n, noise_at_f, n_points)
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     # frequencies that pass sigma criteria
     passed_sigma = np.ones(len(f_n), dtype=bool)
     passed_sigma[remove_sigma] = False

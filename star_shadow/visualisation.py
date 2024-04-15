@@ -22,12 +22,58 @@ from . import utility as ut
 
 # mpl style sheet
 script_dir = os.path.dirname(os.path.abspath(__file__))  # absolute dir the script is in
+<<<<<<< HEAD
 plt.style.use(script_dir.replace('star_shadow/star_shadow', 'star_shadow/data/mpl_stylesheet.dat'))
+=======
+plt.style.use(os.path.join(script_dir, 'data', 'mpl_stylesheet.dat'))
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
 
 
 def plot_pd_single_output(times, signal, p_orb, p_err, const, slope, f_n, a_n, ph_n, i_sectors, annotate=True,
                           save_file=None, show=True):
+<<<<<<< HEAD
     """Plot the periodogram with one output of the analysis recipe."""
+=======
+    """Plot the periodogram with one output of the analysis recipe.
+
+    Parameters
+    ----------
+    times: numpy.ndarray[float]
+        Timestamps of the time series
+    signal: numpy.ndarray[float]
+        Measurement values of the time series
+    p_orb: float
+        Orbital period
+    p_err: float
+        Error associated with the orbital period
+    const: numpy.ndarray[float]
+        The y-intercepts of a piece-wise linear curve
+    slope: numpy.ndarray[float]
+        The slopes of a piece-wise linear curve
+    f_n: numpy.ndarray[float]
+        The frequencies of a number of sine waves
+    a_n: numpy.ndarray[float]
+        The amplitudes of a number of sine waves
+    ph_n: numpy.ndarray[float]
+        The phases of a number of sine waves
+    i_sectors: numpy.ndarray[int]
+        Pair(s) of indices indicating the separately handled timespans
+        in the piecewise-linear curve. These can indicate the TESS
+        observation sectors, but taking half the sectors is recommended.
+        If only a single curve is wanted, set
+        i_half_s = np.array([[0, len(times)]]).
+    annotate: bool, optional
+        If True, annotate the plot with the frequencies.
+    save_file: str, optional
+        File path to save the plot
+    show: bool, optional
+        If True, display the plot
+
+    Returns
+    -------
+    None
+    """
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     # separate harmonics
     harmonics, harmonic_n = af.find_harmonics_from_pattern(f_n, p_orb, f_tol=1e-9)
     # make model
@@ -77,7 +123,45 @@ def plot_pd_single_output(times, signal, p_orb, p_err, const, slope, f_n, a_n, p
 
 
 def plot_pd_full_output(times, signal, models, p_orb_i, p_err_i, f_n_i, a_n_i, i_sectors, save_file=None, show=True):
+<<<<<<< HEAD
     """Plot the periodogram with the full output of the analysis recipe."""
+=======
+    """Plot the periodogram with the full output of the analysis recipe.
+
+    Parameters
+    ----------
+    times: numpy.ndarray[float]
+        Timestamps of the time series
+    signal: numpy.ndarray[float]
+        Measurement values of the time series
+    models: list[numpy.ndarray[float]]
+        List of model signals for different stages of the analysis
+    p_orb_i: list[float]
+        Orbital periods for different stages of the analysis
+    p_err_i: list[float]
+        Errors associated with the orbital periods
+        for different stages of the analysis
+    f_n_i: list[numpy.ndarray[float]]
+        List of extracted frequencies for different stages of the analysis
+    a_n_i: list[numpy.ndarray[float]]
+        List of amplitudes corresponding to the extracted frequencies
+        for different stages of the analysis
+    i_sectors: numpy.ndarray[int]
+        Pair(s) of indices indicating the separately handled timespans
+        in the piecewise-linear curve. These can indicate the TESS
+        observation sectors, but taking half the sectors is recommended.
+        If only a single curve is wanted, set
+        i_half_s = np.array([[0, len(times)]]).
+    save_file: str, optional
+        File path to save the plot
+    show: bool, optional
+        If True, display the plot
+
+    Returns
+    -------
+    None
+    """
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     # make periodograms
     freqs, ampls = tsf.astropy_scargle(times, signal - np.mean(signal))
     freq_range = np.ptp(freqs)
@@ -149,7 +233,43 @@ def plot_pd_full_output(times, signal, models, p_orb_i, p_err_i, f_n_i, a_n_i, i
 
 
 def plot_lc_sinusoids(times, signal, const, slope, f_n, a_n, ph_n, i_sectors, save_file=None, show=True):
+<<<<<<< HEAD
     """Shows the separated harmonics in several ways"""
+=======
+    """Shows the separated harmonics in several ways
+
+    Parameters
+    ----------
+    times: numpy.ndarray[float]
+        Timestamps of the time series
+    signal: numpy.ndarray[float]
+        Measurement values of the time series
+    const: numpy.ndarray[float]
+        The y-intercepts of a piece-wise linear curve
+    slope: numpy.ndarray[float]
+        The slopes of a piece-wise linear curve
+    f_n: numpy.ndarray[float]
+        The frequencies of a number of sine waves
+    a_n: numpy.ndarray[float]
+        The amplitudes of a number of sine waves
+    ph_n: numpy.ndarray[float]
+        The phases of a number of sine waves
+    i_sectors: numpy.ndarray[int]
+        Pair(s) of indices indicating the separately handled timespans
+        in the piecewise-linear curve. These can indicate the TESS
+        observation sectors, but taking half the sectors is recommended.
+        If only a single curve is wanted, set
+        i_half_s = np.array([[0, len(times)]]).
+    save_file: str, optional
+        File path to save the plot
+    show: bool, optional
+        If True, display the plot
+
+    Returns
+    -------
+    None
+    """
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     t_mean = np.mean(times)
     # make models
     model_linear = tsf.linear_curve(times, const, slope, i_sectors)
@@ -179,7 +299,47 @@ def plot_lc_sinusoids(times, signal, const, slope, f_n, a_n, ph_n, i_sectors, sa
 
 def plot_lc_harmonics(times, signal, p_orb, p_err, const, slope, f_n, a_n, ph_n, i_sectors, save_file=None,
                       show=True):
+<<<<<<< HEAD
     """Shows the separated harmonics in several ways"""
+=======
+    """Shows the separated harmonics in several ways
+
+    Parameters
+    ----------
+    times: numpy.ndarray[float]
+        Timestamps of the time series
+    signal: numpy.ndarray[float]
+        Measurement values of the time series
+    p_orb: float
+        Orbital period of the system
+    p_err: float
+        Error in the orbital period
+    const: numpy.ndarray[float]
+        The y-intercepts of a piece-wise linear curve
+    slope: numpy.ndarray[float]
+        The slopes of a piece-wise linear curve
+    f_n: numpy.ndarray[float]
+        The frequencies of a number of sine waves
+    a_n: numpy.ndarray[float]
+        The amplitudes of a number of sine waves
+    ph_n: numpy.ndarray[float]
+        The phases of a number of sine waves
+    i_sectors: numpy.ndarray[int]
+        Pair(s) of indices indicating the separately handled timespans
+        in the piecewise-linear curve. These can indicate the TESS
+        observation sectors, but taking half the sectors is recommended.
+        If only a single curve is wanted, set
+        i_half_s = np.array([[0, len(times)]]).
+    save_file: str, optional
+        File path to save the plot
+    show: bool, optional
+        If True, display the plot
+
+    Returns
+    -------
+    None
+    """
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     t_mean = np.mean(times)
     # make models
     model_line = tsf.linear_curve(times, const, slope, i_sectors)
@@ -218,6 +378,59 @@ def plot_lc_timings_harmonics(times, signal, p_orb, timings, depths, timings_err
                               f_n, a_n, ph_n, f_h, a_h, ph_h, i_sectors, save_file=None, show=True):
     """Shows an overview of the eclipses over one period with the first and
     last contact points as well as minima indicated.
+<<<<<<< HEAD
+=======
+
+    Parameters
+    ----------
+    times: numpy.ndarray[float]
+        Timestamps of the time series
+    signal: numpy.ndarray[float]
+        Measurement values of the time series
+    p_orb: float
+        Orbital period of the eclipsing binary in days
+    timings: numpy.ndarray[float]
+        Eclipse timings: minima, first/last contact points, internal tangency and depths,
+        t_1, t_2, t_1_1, t_1_2, t_2_1, t_2_2 t_b_1_1, t_b_1_2, t_b_2_1, t_b_2_2, depth_1, depth_2
+    depths: numpy.ndarray[float]
+        Eclipse depth of the primary and secondary, depth_1, depth_2
+    timings_err: numpy.ndarray[float]
+        Error estimates for the eclipse timings and depths,
+        t_1_err, t_2_err, t_1_1_err, t_1_2_err, t_2_1_err, t_2_2_err,
+        t_b_1_1_err, t_b_1_2_err, t_b_2_1_err, t_b_2_2_err, depth_1_err, depth_2_err
+    depths_err: numpy.ndarray[float]
+        Error estimates for the depths
+    const: numpy.ndarray[float]
+        The y-intercepts of a piece-wise linear curve
+    slope: numpy.ndarray[float]
+        The slopes of a piece-wise linear curve
+    f_n: numpy.ndarray[float]
+        The frequencies of a number of sine waves
+    a_n: numpy.ndarray[float]
+        The amplitudes of a number of sine waves
+    ph_n: numpy.ndarray[float]
+        The phases of a number of sine waves
+    f_h: numpy.ndarray[float]
+        The frequencies of harmonic sine waves
+    a_h: numpy.ndarray[float]
+        The amplitudes of harmonic sine waves
+    ph_h: numpy.ndarray[float]
+        The phases of harmonic sine waves
+    i_sectors: numpy.ndarray[int]
+        Pair(s) of indices indicating the separately handled timespans
+        in the piecewise-linear curve. These can indicate the TESS
+        observation sectors, but taking half the sectors is recommended.
+        If only a single curve is wanted, set
+        i_half_s = np.array([[0, len(times)]]).
+    save_file: str, optional
+        File path to save the plot
+    show: bool, optional
+        If True, display the plot
+
+    Returns
+    -------
+    None
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     """
     t_1, t_2, t_1_1, t_1_2, t_2_1, t_2_2, t_b_1_1, t_b_1_2, t_b_2_1, t_b_2_2 = timings
     t_1_err, t_2_err, t_1_1_err, t_1_2_err, t_2_1_err, t_2_2_err = timings_err[:6]
@@ -342,6 +555,30 @@ def plot_lc_timings_harmonics(times, signal, p_orb, timings, depths, timings_err
 def plot_lc_derivatives(p_orb, f_h, a_h, ph_h, ecl_indices, save_file=None, show=True):
     """Shows the light curve and three time derivatives with the significant
     points on the curves used to identify the eclipses
+<<<<<<< HEAD
+=======
+
+    Parameters
+    ----------
+    p_orb: float
+        Orbital period of the eclipsing binary in days
+    f_h: numpy.ndarray[float]
+        The frequencies of harmonic sine waves
+    a_h: numpy.ndarray[float]
+        The amplitudes of harmonic sine waves
+    ph_h: numpy.ndarray[float]
+        The phases of harmonic sine waves
+    ecl_indices: numpy.ndarray[int]
+        Indices of several important points in the harmonic model
+    save_file: str, optional
+        File path to save the plot
+    show: bool, optional
+        If True, display the plot
+
+    Returns
+    -------
+    None
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     """
     harmonics, harmonic_n = af.find_harmonics_from_pattern(f_h, p_orb, f_tol=1e-9)
     if (len(f_h) > 0):
@@ -504,6 +741,59 @@ def plot_lc_derivatives(p_orb, f_h, a_h, ph_h, ecl_indices, save_file=None, show
 def plot_lc_empirical_model(times, signal, p_orb, timings, depths, const, slope, f_n, a_n, ph_n, timings_em, depths_em,
                             heights_em, timings_err, depths_err, i_sectors, save_file=None, show=True):
     """Shows the initial and final simple empirical function eclipse model
+<<<<<<< HEAD
+=======
+
+    Parameters
+    ----------
+    times: numpy.ndarray[float]
+        Timestamps of the time series
+    signal: numpy.ndarray[float]
+        Measurement values of the time series
+    p_orb: float
+        Orbital period
+    timings: numpy.ndarray[float]
+        Eclipse timings: minima, first/last contact points, internal tangency and depths,
+        t_1, t_2, t_1_1, t_1_2, t_2_1, t_2_2 t_b_1_1, t_b_1_2, t_b_2_1, t_b_2_2, depth_1, depth_2
+    depths: numpy.ndarray[float]
+        Eclipse depth of the primary and secondary, depth_1, depth_2
+    const: numpy.ndarray[float]
+        The y-intercepts of a piece-wise linear curve
+    slope: numpy.ndarray[float]
+        The slopes of a piece-wise linear curve
+    f_n: numpy.ndarray[float]
+        The frequencies of a number of sine waves
+    a_n: numpy.ndarray[float]
+        The amplitudes of a number of sine waves
+    ph_n: numpy.ndarray[float]
+        The phases of a number of sine waves
+    timings_em: numpy.ndarray[float]
+        Empirical eclipse timing parameters
+    depths_em: numpy.ndarray[float]
+        Empirical eclipse depths
+    heights_em: numpy.ndarray[float]
+        Heights of the eclipses
+    timings_err: numpy.ndarray[float]
+        Error estimates for the eclipse timings and depths,
+        t_1_err, t_2_err, t_1_1_err, t_1_2_err, t_2_1_err, t_2_2_err,
+        t_b_1_1_err, t_b_1_2_err, t_b_2_1_err, t_b_2_2_err, depth_1_err, depth_2_err
+    depths_err: numpy.ndarray[float]
+        Error estimates for the depths
+    i_sectors: numpy.ndarray[int]
+        Pair(s) of indices indicating the separately handled timespans
+        in the piecewise-linear curve. These can indicate the TESS
+        observation sectors, but taking half the sectors is recommended.
+        If only a single curve is wanted, set
+        i_half_s = np.array([[0, len(times)]]).
+    save_file: str, optional
+        File path to save the plot
+    show: bool, optional
+        If True, display the plot
+
+    Returns
+    -------
+    None
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     """
     # unpack/define parameters
     t_zero_init = timings[0]
@@ -661,7 +951,44 @@ def plot_dists_eclipse_parameters(e, w, i, r_sum, r_rat, sb_rat, e_vals, w_vals,
     """Shows the histograms resulting from the input distributions
     and the hdi_prob=0.683 and hdi_prob=0.997 bounds resulting from the HDIs
 
+<<<<<<< HEAD
     Note: produces several plots
+=======
+    Parameters
+    ----------
+    e: float
+        Eccentricity
+    w: float
+        Argument of periastron in radians
+    i: float
+        Inclination in radians
+    r_sum: float
+        Sum of radii in units of the semi-major axis
+    r_rat: float
+        Radius ratio r_2/r_1
+    sb_rat: float
+        Surface brightness ratio sb_2/sb_1
+    e_vals: numpy.ndarray[float]
+        Eccentricity values from sampling
+    w_vals: numpy.ndarray[float]
+        Argument of periastron values from sampling
+    i_vals: numpy.ndarray[float]
+        Inclination values from sampling
+    r_sum_vals: numpy.ndarray[float]
+        Sum of radii values from sampling
+    r_rat_vals: numpy.ndarray[float]
+        Ratio of radii values from sampling
+    sb_rat_vals: numpy.ndarray[float]
+        Surface brightness ratio values from sampling
+
+    Returns
+    -------
+    None
+
+    Notes
+    -----
+    produces several plots
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     """
     cos_w = np.cos(w)
     sin_w = np.sin(w)
@@ -903,8 +1230,40 @@ def plot_dists_eclipse_parameters(e, w, i, r_sum, r_rat, sb_rat, e_vals, w_vals,
 
 def plot_corner_eclipse_elements(p_orb, timings, depths, ecl_par, dists_in, dists_out, save_file=None, show=True):
     """Shows the corner plots resulting from the input distributions
+<<<<<<< HEAD
     
     Note: produces several plots
+=======
+
+    Parameters
+    ----------
+    p_orb: float
+        Orbital period in days
+    timings: numpy.ndarray[float]
+        Eclipse timings: minima, first/last contact points, internal tangency and depths,
+        t_1, t_2, t_1_1, t_1_2, t_2_1, t_2_2, t_b_1_1, t_b_1_2, t_b_2_1, t_b_2_2, depth_1, depth_2
+    depths: tuple
+        Eclipse depth of the primary and secondary, depth_1, depth_2
+    ecl_par: tuple
+        Eclipse model parameters
+    dists_in: tuple[numpy.ndarray[float]]
+        Full input distributions for: p, t_1, t_2, t_1_1, t_1_2, t_2_1, t_2_2,
+        t_b_1_1, t_b_1_2, t_b_2_1, t_b_2_2, d_1, d_2
+    dists_out: tuple[numpy.ndarray[float]]
+        Full output distributions for the same parameters as intervals
+    save_file: str, optional
+        File path to save the plot
+    show: bool, optional
+        If True, display the plot
+
+    Returns
+    -------
+    None
+
+    Notes
+    -----
+    produces several plots
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     """
     r2d = 180 / np.pi  # radians to degrees
     t_1, t_2, t_1_1, t_1_2, t_2_1, t_2_2, t_b_1_1, t_b_1_2, t_b_2_1, t_b_2_2 = timings
@@ -1013,6 +1372,53 @@ def plot_lc_model_sigma(times, signal, p_orb, t_zero, timings, const, slope, f_n
                         ecl_par, par_i, par_bounds, save_file=None, show=True):
     """Shows the difference one parameter makes in the eclipse model
     for three different values
+<<<<<<< HEAD
+=======
+
+    Parameters
+    ----------
+    times: numpy.ndarray[float]
+        Timestamps of the time series
+    signal: numpy.ndarray[float]
+        Measurement values of the time series
+    p_orb: float
+        Orbital period
+    t_zero: float
+        Zero point of the time series
+    timings: numpy.ndarray[float]
+        Eclipse timings: minima, first/last contact points, internal tangency and depths,
+        t_1, t_2, t_1_1, t_1_2, t_2_1, t_2_2 t_b_1_1, t_b_1_2, t_b_2_1, t_b_2_2
+    const: numpy.ndarray[float]
+        The y-intercepts of a piece-wise linear curve
+    slope: numpy.ndarray[float]
+        The slopes of a piece-wise linear curve
+    f_n: numpy.ndarray[float]
+        The frequencies of a number of sine waves
+    a_n: numpy.ndarray[float]
+        The amplitudes of a number of sine waves
+    ph_n: numpy.ndarray[float]
+        The phases of a number of sine waves
+    i_sectors: numpy.ndarray[int]
+        Pair(s) of indices indicating the separately handled timespans
+        in the piecewise-linear curve. These can indicate the TESS
+        observation sectors, but taking half the sectors is recommended.
+        If only a single curve is wanted, set
+        i_half_s = np.array([[0, len(times)]]).
+    ecl_par: numpy.ndarray[float]
+        Eclipse model parameters
+    par_i: int
+        Index of the parameter to vary
+    par_bounds: numpy.ndarray[float]
+        Bounds of the parameter variation
+    save_file: str, optional
+        File path to save the plot
+    show: bool, optional
+        If True, display the plot
+
+    Returns
+    -------
+    None
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     """
     t_1, t_2, t_1_1, t_1_2, t_2_1, t_2_2, t_b_1_1, t_b_1_2, t_b_2_1, t_b_2_2 = timings
     # make the model times array, one full period plus the primary eclipse halves
@@ -1087,6 +1493,48 @@ def plot_lc_physical_model(times, signal, p_orb, t_zero, const_r, slope_r, f_n_r
     """Shows an overview of the eclipses over one period with the determination
     of orbital parameters using both the eclipse timings and the ellc light curve
     models over two consecutive fits.
+<<<<<<< HEAD
+=======
+
+    Parameters
+    ----------
+    times: numpy.ndarray[float]
+        Timestamps of the time series
+    signal: numpy.ndarray[float]
+        Measurement values of the time series
+    p_orb: float
+        Orbital period
+    t_zero: float
+        Zero point of the time series
+    const_r: numpy.ndarray[float]
+        The y-intercepts of a piece-wise linear curve
+    slope_r: numpy.ndarray[float]
+        The slopes of a piece-wise linear curve
+    f_n_r: numpy.ndarray[float]
+        The frequencies of a number of sine waves
+    a_n_r: numpy.ndarray[float]
+        The amplitudes of a number of sine waves
+    ph_n_r: numpy.ndarray[float]
+        The phases of a number of sine waves
+    ecl_par: numpy.ndarray[float]
+        Eclipse model parameters
+    passed_r: numpy.ndarray[int]
+        Indices of frequencies passing criteria
+    i_sectors: numpy.ndarray[int]
+        Pair(s) of indices indicating the separately handled timespans
+        in the piecewise-linear curve. These can indicate the TESS
+        observation sectors, but taking half the sectors is recommended.
+        If only a single curve is wanted, set
+        i_half_s = np.array([[0, len(times)]]).
+    save_file: str, optional
+        File path to save the plot
+    show: bool, optional
+        If True, display the plot
+
+    Returns
+    -------
+    None
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     """
     t_mean = np.mean(times)
     # eclipse signal with disentangled frequencies
@@ -1134,6 +1582,56 @@ def plot_lc_physical_model_h(times, signal, p_orb, t_zero, timings_init, timings
     """Shows an overview of the eclipses over one period with the determination
     of orbital parameters using both the eclipse timings and the ellc light curve
     models over two consecutive fits.
+<<<<<<< HEAD
+=======
+
+    Parameters
+    ----------
+    times: numpy.ndarray[float]
+        Timestamps of the time series
+    signal: numpy.ndarray[float]
+        Measurement values of the time series
+    p_orb: float
+        Orbital period
+    t_zero: float
+        Zero point of the time series
+    timings_init: numpy.ndarray[float]
+        Initial eclipse timings
+    timings: numpy.ndarray[float]
+        Eclipse timings
+    const: numpy.ndarray[float]
+        The y-intercepts of a piece-wise linear curve
+    slope: numpy.ndarray[float]
+        The slopes of a piece-wise linear curve
+    f_n: numpy.ndarray[float]
+        The frequencies of a number of sine waves
+    a_n: numpy.ndarray[float]
+        The amplitudes of a number of sine waves
+    ph_n: numpy.ndarray[float]
+        The phases of a number of sine waves
+    ecl_par_init: numpy.ndarray[float]
+        Initial eclipse model parameters
+    ecl_par: numpy.ndarray[float]
+        Eclipse model parameters
+    passed_r: numpy.ndarray[int]
+        Indices of frequencies passing criteria
+    passed_h: numpy.ndarray[int]
+        Indices of candidate harmonics passing criteria
+    i_sectors: numpy.ndarray[int]
+        Pair(s) of indices indicating the separately handled timespans
+        in the piecewise-linear curve. These can indicate the TESS
+        observation sectors, but taking half the sectors is recommended.
+        If only a single curve is wanted, set
+        i_half_s = np.array([[0, len(times)]]).
+    save_file: str, optional
+        File path to save the plot
+    show: bool, optional
+        If True, display the plot
+
+    Returns
+    -------
+    None
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     """
     timings_init = timings_init - timings_init[0]
     t_1, t_2, t_1_1, t_1_2, t_2_1, t_2_2, t_b_1_1, t_b_1_2, t_b_2_1, t_b_2_2 = timings - t_zero
@@ -1221,10 +1719,58 @@ def plot_lc_physical_model_h(times, signal, p_orb, t_zero, timings_init, timings
 
 
 def plot_pd_leftover_sinusoids(times, signal, p_orb, t_zero, const_r, slope_r, f_n_r, a_n_r, ph_n_r, passed_r,
+<<<<<<< HEAD
                                param_lc, i_sectors, sn_thr, model='simple', save_file=None, show=True):
     """Shows an overview of the eclipses over one period with the determination
     of orbital parameters using both the eclipse timings and the ellc light curve
     models over two consecutive fits.
+=======
+                               param_lc, i_sectors, model='simple', save_file=None, show=True):
+    """Shows an overview of the eclipses over one period with the determination
+    of orbital parameters using both the eclipse timings and the ellc light curve
+    models over two consecutive fits.
+
+    Parameters
+    ----------
+    times: numpy.ndarray[float]
+        Timestamps of the time series
+    signal: numpy.ndarray[float]
+        Measurement values of the time series
+    p_orb: float
+        Orbital period
+    t_zero: float
+        Zero point of the time series
+    const_r: numpy.ndarray[float]
+        The y-intercepts of a piece-wise linear curve
+    slope_r: numpy.ndarray[float]
+        The slopes of a piece-wise linear curve
+    f_n_r: numpy.ndarray[float]
+        The frequencies of a number of sine waves
+    a_n_r: numpy.ndarray[float]
+        The amplitudes of a number of sine waves
+    ph_n_r: numpy.ndarray[float]
+        The phases of a number of sine waves
+    passed_r: numpy.ndarray[int]
+        Indices of frequencies passing criteria
+    param_lc: numpy.ndarray[float]
+        Parameters for the eclipse model
+    i_sectors: numpy.ndarray[int]
+        Pair(s) of indices indicating the separately handled timespans
+        in the piecewise-linear curve. These can indicate the TESS
+        observation sectors, but taking half the sectors is recommended.
+        If only a single curve is wanted, set
+        i_half_s = np.array([[0, len(times)]]).
+    model: str, optional
+        Model to use for the eclipse ('simple' or 'ellc')
+    save_file: str, optional
+        File path to save the plot
+    show: bool, optional
+        If True, display the plot
+
+    Returns
+    -------
+    None
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     """
     # convert bool mask to indices
     passed_r_i = np.arange(len(f_n_r))[passed_r]
@@ -1245,10 +1791,14 @@ def plot_pd_leftover_sinusoids(times, signal, p_orb, t_zero, const_r, slope_r, f
     freqs, ampls = tsf.astropy_scargle(times, ecl_resid)
     freq_range = np.ptp(freqs)
     freqs_1, ampls_1 = tsf.astropy_scargle(times, full_resid)
+<<<<<<< HEAD
     if float(sn_thr) == -1 :
         snr_threshold = ut.signal_to_noise_threshold(times)
     else :
         snr_threshold = float(sn_thr)
+=======
+    snr_threshold = ut.signal_to_noise_threshold(len(signal))
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     noise_spectrum = tsf.scargle_noise_spectrum(times, full_resid)
     # plot
     fig, ax = plt.subplots()
@@ -1279,7 +1829,47 @@ def plot_pd_leftover_sinusoids(times, signal, p_orb, t_zero, const_r, slope_r, f
 
 def plot_corner_eclipse_mcmc(inf_data, ecosw, esinw, cosi, phi_0, r_rat, sb_rat, const, slope, f_n, a_n, ph_n,
                              save_file=None, show=True):
+<<<<<<< HEAD
     """Show the pymc3 physical eclipse parameter sampling results in two corner plots"""
+=======
+    """Show the pymc3 physical eclipse parameter sampling results in two corner plots
+
+    Parameters
+    ----------
+    inf_data: object
+        Arviz inference data object
+    ecosw: float
+        Eccentricity times cosine omega
+    esinw: float
+        Eccentricity times sine omega
+    cosi: float
+        Cosine of the inclination of the orbit
+    phi_0: float
+        Auxiliary angle (see Kopal 1959)
+    r_rat: float
+        Radius ratio r_2/r_1
+    sb_rat: float
+        Surface brightness ratio sb_2/sb_1
+    const: numpy.ndarray[float]
+        The y-intercepts of a piece-wise linear curve
+    slope: numpy.ndarray[float]
+        The slopes of a piece-wise linear curve
+    f_n: numpy.ndarray[float]
+        The frequencies of a number of sine waves
+    a_n: numpy.ndarray[float]
+        The amplitudes of a number of sine waves
+    ph_n: numpy.ndarray[float]
+        The phases of a number of sine waves
+    save_file: str, optional
+        File path to save the plot
+    show: bool, optional
+        If True, display the plot
+
+    Returns
+    -------
+    None
+    """
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     # stacked parameter chains
     const_ch = inf_data.posterior.const.stack(dim=['chain', 'draw']).to_numpy()
     slope_ch = inf_data.posterior.slope.stack(dim=['chain', 'draw']).to_numpy()
@@ -1359,7 +1949,31 @@ def plot_corner_eclipse_mcmc(inf_data, ecosw, esinw, cosi, phi_0, r_rat, sb_rat,
 
 
 def plot_trace_sinusoids(inf_data, const, slope, f_n, a_n, ph_n):
+<<<<<<< HEAD
     """Show the pymc3 sampling results in a trace plot"""
+=======
+    """Show the pymc3 sampling results in a trace plot
+
+    Parameters
+    ----------
+    inf_data: object
+        Arviz inference data object
+    const: numpy.ndarray[float]
+        The y-intercepts of a piece-wise linear curve
+    slope: numpy.ndarray[float]
+        The slopes of a piece-wise linear curve
+    f_n: numpy.ndarray[float]
+        The frequencies of a number of sine waves
+    a_n: numpy.ndarray[float]
+        The amplitudes of a number of sine waves
+    ph_n: numpy.ndarray[float]
+        The phases of a number of sine waves
+
+    Returns
+    -------
+    None
+    """
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     # convert phases to interval [-pi, pi] from [0, 2pi]
     above_pi = (ph_n >= np.pi)
     ph_n[above_pi] = ph_n[above_pi] - 2 * np.pi
@@ -1369,7 +1983,37 @@ def plot_trace_sinusoids(inf_data, const, slope, f_n, a_n, ph_n):
 
 
 def plot_pair_harmonics(inf_data, p_orb, const, slope, f_n, a_n, ph_n, save_file=None, show=True):
+<<<<<<< HEAD
     """Show the pymc3 sampling results in several pair plots"""
+=======
+    """Show the pymc3 sampling results in several pair plots
+
+    Parameters
+    ----------
+    inf_data: object
+        Arviz inference data object
+    p_orb: float
+        Orbital period
+    const: numpy.ndarray[float]
+        The y-intercepts of a piece-wise linear curve
+    slope: numpy.ndarray[float]
+        The slopes of a piece-wise linear curve
+    f_n: numpy.ndarray[float]
+        The frequencies of a number of sine waves
+    a_n: numpy.ndarray[float]
+        The amplitudes of a number of sine waves
+    ph_n: numpy.ndarray[float]
+        The phases of a number of sine waves
+    save_file: str, optional
+        File path to save the plot
+    show: bool, optional
+        If True, display the plot
+
+    Returns
+    -------
+    None
+    """
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     # convert phases to interval [-pi, pi] from [0, 2pi]
     above_pi = (ph_n >= np.pi)
     ph_n[above_pi] = ph_n[above_pi] - 2 * np.pi
@@ -1395,7 +2039,33 @@ def plot_pair_harmonics(inf_data, p_orb, const, slope, f_n, a_n, ph_n, save_file
 
 
 def plot_trace_harmonics(inf_data, p_orb, const, slope, f_n, a_n, ph_n):
+<<<<<<< HEAD
     """Show the pymc3 sampling results in a trace plot"""
+=======
+    """Show the pymc3 sampling results in a trace plot
+
+    Parameters
+    ----------
+    inf_data: object
+        Arviz inference data object
+    p_orb: float
+        Orbital period
+    const: numpy.ndarray[float]
+        The y-intercepts of a piece-wise linear curve
+    slope: numpy.ndarray[float]
+        The slopes of a piece-wise linear curve
+    f_n: numpy.ndarray[float]
+        The frequencies of a number of sine waves
+    a_n: numpy.ndarray[float]
+        The amplitudes of a number of sine waves
+    ph_n: numpy.ndarray[float]
+        The phases of a number of sine waves
+
+    Returns
+    -------
+    None
+    """
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     # convert phases to interval [-pi, pi] from [0, 2pi]
     above_pi = (ph_n >= np.pi)
     ph_n[above_pi] = ph_n[above_pi] - 2 * np.pi
@@ -1410,7 +2080,47 @@ def plot_trace_harmonics(inf_data, p_orb, const, slope, f_n, a_n, ph_n):
 
 def plot_pair_eclipse(inf_data, ecosw, esinw, cosi, phi_0, log_rr, log_sb, const, slope, f_n, a_n, ph_n,
                       save_file=None, show=True):
+<<<<<<< HEAD
     """Show the pymc3 sampling results in several pair plots"""
+=======
+    """Show the pymc3 sampling results in several pair plots
+
+    Parameters
+    ----------
+    inf_data: object
+        Arviz inference data object
+    ecosw: float
+        Eccentricity times cosine omega
+    esinw: float
+        Eccentricity times sine omega
+    cosi: float
+        Cosine of the inclination of the orbit
+    phi_0: float
+        Auxiliary angle (see Kopal 1959)
+    log_rr: float
+        Logarithm of the radius ratio log(r_2/r_1)
+    log_sb: float
+        Logarithm of the surface brightness ratio log(sb_2/sb_1)
+    const: numpy.ndarray[float]
+        The y-intercepts of a piece-wise linear curve
+    slope: numpy.ndarray[float]
+        The slopes of a piece-wise linear curve
+    f_n: numpy.ndarray[float]
+        The frequencies of a number of sine waves
+    a_n: numpy.ndarray[float]
+        The amplitudes of a number of sine waves
+    ph_n: numpy.ndarray[float]
+        The phases of a number of sine waves
+    save_file: str, optional
+        File path to save the plot
+    show: bool, optional
+        If True, display the plot
+
+    Returns
+    -------
+    None
+    """
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     # convert phases to interval [-pi, pi] from [0, 2pi]
     above_pi = (ph_n >= np.pi)
     ph_n[above_pi] = ph_n[above_pi] - 2 * np.pi
@@ -1437,7 +2147,45 @@ def plot_pair_eclipse(inf_data, ecosw, esinw, cosi, phi_0, log_rr, log_sb, const
 
 
 def plot_trace_eclipse(inf_data, t_zero, ecosw, esinw, cosi, phi_0, log_rr, log_sb, const, slope, f_n, a_n, ph_n):
+<<<<<<< HEAD
     """Show the pymc3 sampling results in a trace plot"""
+=======
+    """Show the pymc3 sampling results in a trace plot
+
+    Parameters
+    ----------
+    inf_data: object
+        Arviz inference data object
+    t_zero: float
+        Time of primary eclipse center
+    ecosw: float
+        Eccentricity times cosine omega
+    esinw: float
+        Eccentricity times sine omega
+    cosi: float
+        Cosine of the inclination of the orbit
+    phi_0: float
+        Auxiliary angle (see Kopal 1959)
+    log_rr: float
+        Logarithm of the radius ratio log(r_2/r_1)
+    log_sb: float
+        Logarithm of the surface brightness ratio log(sb_2/sb_1)
+    const: numpy.ndarray[float]
+        The y-intercepts of a piece-wise linear curve
+    slope: numpy.ndarray[float]
+        The slopes of a piece-wise linear curve
+    f_n: numpy.ndarray[float]
+        The frequencies of a number of sine waves
+    a_n: numpy.ndarray[float]
+        The amplitudes of a number of sine waves
+    ph_n: numpy.ndarray[float]
+        The phases of a number of sine waves
+
+    Returns
+    -------
+    None
+    """
+>>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
     # convert phases to interval [-pi, pi] from [0, 2pi]
     above_pi = (ph_n >= np.pi)
     ph_n[above_pi] = ph_n[above_pi] - 2 * np.pi
