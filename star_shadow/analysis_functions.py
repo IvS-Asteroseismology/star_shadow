@@ -178,7 +178,13 @@ def remove_insignificant_snr(a_n, noise_at_f, times, sn_thr):
     Not to be confused with the noise on the individual data points of the
     time series.
     """
-    snr_threshold = ut.signal_to_noise_threshold(n_points)
+    if float(sn_thr) == -1 :
+        snr_threshold = ut.signal_to_noise_threshold(times)
+    else :
+        snr_threshold = float(sn_thr)
+        #t_diff = np.diff(times)
+        #if np.any(t_diff > 100) :
+        #    snr_threshold = snr_threshold + 0.25
     # signal-to-noise below threshold
     a_insig_1 = (a_n / noise_at_f < snr_threshold)
     remove = np.arange(len(a_n))[a_insig_1]

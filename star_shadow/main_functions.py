@@ -1714,6 +1714,7 @@ def analyse_eclipses(times, signal, signal_err, i_sectors, t_stats, target_id, s
     # --------------------------------------------------
     file_name = os.path.join(save_dir, f'{target_id}_analysis', f'{target_id}_analysis_8.hdf5')
     out_8 = optimise_physical_elements(times, signal, p_orb, timings[0], ecl_par, phys_err, i_sectors, t_stats,
+                                       file_name, method=method, **arg_dict)
     # save the results in ascii format
     if save_ascii:
         ut.convert_hdf5_to_ascii(file_name)
