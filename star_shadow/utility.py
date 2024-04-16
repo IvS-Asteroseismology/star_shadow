@@ -174,6 +174,7 @@ def bounds_multiplicity_check(bounds, value):
 
 @nb.njit(cache=True)
 <<<<<<< HEAD
+<<<<<<< HEAD
 def signal_to_noise_threshold(times):
     """Determine the signal-to-noise threshold for accepting frequencies
     based on the number of points and gaps
@@ -183,6 +184,8 @@ def signal_to_noise_threshold(times):
     times: np.ndarray[float]
         Time of each datapoint in the light curve
 =======
+=======
+>>>>>>> master
 def signal_to_noise_threshold(n_points):
     """Determine the signal-to-noise threshold for accepting frequencies
     based on the number of points
@@ -191,7 +194,10 @@ def signal_to_noise_threshold(n_points):
     ----------
     n_points: int
         Number of data points in the time series
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
     
     Returns
     -------
@@ -203,6 +209,7 @@ def signal_to_noise_threshold(n_points):
     Baran & Koen 2021, eq 6.
     (https://ui.adsabs.harvard.edu/abs/2021AcA....71..113B/abstract)
     """
+<<<<<<< HEAD
 <<<<<<< HEAD
     n_points = len(times)
     sn_thr = 1.201 * np.sqrt(1.05 * np.log(n_points) + 7.184)
@@ -218,6 +225,9 @@ def signal_to_noise_threshold(n_points):
 =======
     sn_thr = 1.201 * np.sqrt(1.05 * np.log(n_points) + 7.184)
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+    sn_thr = 1.201 * np.sqrt(1.05 * np.log(n_points) + 7.184)
+>>>>>>> master
     sn_thr = np.round(sn_thr, 2)  # round to two decimals
     return sn_thr
 
@@ -1651,11 +1661,16 @@ def save_summary(target_id, save_dir, data_id='none'):
     t_tot, t_mean = 0, 0
     # read results
 <<<<<<< HEAD
+<<<<<<< HEAD
     save_dir = os.path.join(save_dir, f'{target_id}_analysis')  # add subdir
 =======
     if not save_dir.endswith(f'{target_id}_analysis'):
         save_dir = os.path.join(save_dir, f'{target_id}_analysis')  # add subdir
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+    if not save_dir.endswith(f'{target_id}_analysis'):
+        save_dir = os.path.join(save_dir, f'{target_id}_analysis')  # add subdir
+>>>>>>> master
     # get period from last prewhitening step
     file_name_3 = os.path.join(save_dir, f'{target_id}_analysis_3.hdf5')
     file_name_5 = os.path.join(save_dir, f'{target_id}_analysis_5.hdf5')
@@ -1772,10 +1787,14 @@ def save_summary(target_id, save_dir, data_id='none'):
             'error in start of (flat) eclipse bottom left of secondary minimum',
             'error in end of (flat) eclipse bottom right of secondary minimum',
 <<<<<<< HEAD
+<<<<<<< HEAD
             'individual error in depth of primary minimum', 'individual error in depth of secondary minimum',
 =======
             'error in depth of primary minimum', 'error in depth of secondary minimum',
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+            'error in depth of primary minimum', 'error in depth of secondary minimum',
+>>>>>>> master
             'individual error in time of primary minimum (t_1)', 'individual error in time of secondary minimum (t_2)',
             'individual error in time of primary first contact (t_1_1)',
             'individual error in time of primary last contact (t_1_2)',
@@ -1801,6 +1820,7 @@ def save_summary(target_id, save_dir, data_id='none'):
             'error estimate for i used for formal errors', 'formal uncorrelated error in r_sum',
             'scaled error formal estimate for r_rat', 'scaled error formal estimate for sb_rat',
 <<<<<<< HEAD
+<<<<<<< HEAD
             'upper error estimate in ecosw', 'lower error estimate in ecosw',
             'upper error estimate in esinw', 'lower error estimate in esinw',
             'upper error estimate in cosi', 'lower error estimate in cosi',
@@ -1814,6 +1834,8 @@ def save_summary(target_id, save_dir, data_id='none'):
             'upper error estimate in r_rat', 'lower error estimate in r_rat',
             'upper error estimate in sb_rat', 'lower error estimate in sb_rat',
 =======
+=======
+>>>>>>> master
             'lower error estimate in ecosw', 'upper error estimate in ecosw',
             'lower error estimate in esinw', 'upper error estimate in esinw',
             'lower error estimate in cosi', 'upper error estimate in cosi',
@@ -1826,7 +1848,10 @@ def save_summary(target_id, save_dir, data_id='none'):
             'lower error estimate in r_sum', 'upper error estimate in r_sum',
             'lower error estimate in r_rat', 'upper error estimate in r_rat',
             'lower error estimate in sb_rat', 'upper error estimate in sb_rat',
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
             'e cos(w) of the physical model', 'e sin(w) of the physical model',
             'cos(i) of the physical model', 'phi_0 of the physical model',
             'log of radius ratio of the physical model', 'log of surface brightness ratio of the physical model',
@@ -1843,6 +1868,7 @@ def save_summary(target_id, save_dir, data_id='none'):
             'lower HDI error estimate in w', 'upper HDI error estimate in w',
             'lower HDI error estimate in i', 'upper HDI error estimate in i',
 <<<<<<< HEAD
+<<<<<<< HEAD
             'lower HDI error estimate in r_rat', 'upper HDI error estimate in r_rat',
             'lower HDI error estimate in sb_rat', 'upper HDI error estimate in sb_rat',
             'lower HDI error estimate in r_sum', 'upper HDI error estimate in r_sum',
@@ -1851,6 +1877,11 @@ def save_summary(target_id, save_dir, data_id='none'):
             'lower HDI error estimate in r_rat', 'upper HDI error estimate in r_rat',
             'lower HDI error estimate in sb_rat', 'upper HDI error estimate in sb_rat',
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+            'lower HDI error estimate in r_sum', 'upper HDI error estimate in r_sum',
+            'lower HDI error estimate in r_rat', 'upper HDI error estimate in r_rat',
+            'lower HDI error estimate in sb_rat', 'upper HDI error estimate in sb_rat',
+>>>>>>> master
             'number of parameters after physical model optimisation',
             'BIC after physical model optimisation', 'noise level after physical model optimisation',
             'total number of frequencies', 'number of frequencies that passed the sigma test',
@@ -1892,10 +1923,14 @@ def save_summary(target_id, save_dir, data_id='none'):
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 def sequential_plotting(times, signal, i_sectors, target_id, load_dir, sn_thr, save_dir=None, show=True):
 =======
 def sequential_plotting(times, signal, i_sectors, target_id, load_dir, save_dir=None, show=True):
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+def sequential_plotting(times, signal, i_sectors, target_id, load_dir, save_dir=None, show=True):
+>>>>>>> master
     """Due to plotting not working under multiprocessing this function is
     made to make plots after running the analysis in parallel.
     
@@ -2149,10 +2184,14 @@ def sequential_plotting(times, signal, i_sectors, target_id, load_dir, save_dir=
             file_name = None
         vis.plot_pd_leftover_sinusoids(times, signal, p_orb_5, t_zero_8, const_8, slope_8, f_n_8, a_n_8, ph_n_8,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                        passed_b_9, ecl_par_8, i_sectors, sn_thr, save_file=file_name, show=show)
 =======
                                        passed_b_9, ecl_par_8, i_sectors, save_file=file_name, show=show)
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+                                       passed_b_9, ecl_par_8, i_sectors, save_file=file_name, show=show)
+>>>>>>> master
     except NameError:
         pass  # some variable wasn't loaded (file did not exist)
     return None

@@ -23,17 +23,24 @@ from . import utility as ut
 # mpl style sheet
 script_dir = os.path.dirname(os.path.abspath(__file__))  # absolute dir the script is in
 <<<<<<< HEAD
+<<<<<<< HEAD
 plt.style.use(script_dir.replace('star_shadow/star_shadow', 'star_shadow/data/mpl_stylesheet.dat'))
 =======
 plt.style.use(os.path.join(script_dir, 'data', 'mpl_stylesheet.dat'))
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+plt.style.use(os.path.join(script_dir, 'data', 'mpl_stylesheet.dat'))
+>>>>>>> master
 
 
 def plot_pd_single_output(times, signal, p_orb, p_err, const, slope, f_n, a_n, ph_n, i_sectors, annotate=True,
                           save_file=None, show=True):
 <<<<<<< HEAD
+<<<<<<< HEAD
     """Plot the periodogram with one output of the analysis recipe."""
 =======
+=======
+>>>>>>> master
     """Plot the periodogram with one output of the analysis recipe.
 
     Parameters
@@ -73,7 +80,10 @@ def plot_pd_single_output(times, signal, p_orb, p_err, const, slope, f_n, a_n, p
     -------
     None
     """
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
     # separate harmonics
     harmonics, harmonic_n = af.find_harmonics_from_pattern(f_n, p_orb, f_tol=1e-9)
     # make model
@@ -124,8 +134,11 @@ def plot_pd_single_output(times, signal, p_orb, p_err, const, slope, f_n, a_n, p
 
 def plot_pd_full_output(times, signal, models, p_orb_i, p_err_i, f_n_i, a_n_i, i_sectors, save_file=None, show=True):
 <<<<<<< HEAD
+<<<<<<< HEAD
     """Plot the periodogram with the full output of the analysis recipe."""
 =======
+=======
+>>>>>>> master
     """Plot the periodogram with the full output of the analysis recipe.
 
     Parameters
@@ -161,7 +174,10 @@ def plot_pd_full_output(times, signal, models, p_orb_i, p_err_i, f_n_i, a_n_i, i
     -------
     None
     """
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
     # make periodograms
     freqs, ampls = tsf.astropy_scargle(times, signal - np.mean(signal))
     freq_range = np.ptp(freqs)
@@ -234,8 +250,11 @@ def plot_pd_full_output(times, signal, models, p_orb_i, p_err_i, f_n_i, a_n_i, i
 
 def plot_lc_sinusoids(times, signal, const, slope, f_n, a_n, ph_n, i_sectors, save_file=None, show=True):
 <<<<<<< HEAD
+<<<<<<< HEAD
     """Shows the separated harmonics in several ways"""
 =======
+=======
+>>>>>>> master
     """Shows the separated harmonics in several ways
 
     Parameters
@@ -269,7 +288,10 @@ def plot_lc_sinusoids(times, signal, const, slope, f_n, a_n, ph_n, i_sectors, sa
     -------
     None
     """
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
     t_mean = np.mean(times)
     # make models
     model_linear = tsf.linear_curve(times, const, slope, i_sectors)
@@ -300,8 +322,11 @@ def plot_lc_sinusoids(times, signal, const, slope, f_n, a_n, ph_n, i_sectors, sa
 def plot_lc_harmonics(times, signal, p_orb, p_err, const, slope, f_n, a_n, ph_n, i_sectors, save_file=None,
                       show=True):
 <<<<<<< HEAD
+<<<<<<< HEAD
     """Shows the separated harmonics in several ways"""
 =======
+=======
+>>>>>>> master
     """Shows the separated harmonics in several ways
 
     Parameters
@@ -339,7 +364,10 @@ def plot_lc_harmonics(times, signal, p_orb, p_err, const, slope, f_n, a_n, ph_n,
     -------
     None
     """
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
     t_mean = np.mean(times)
     # make models
     model_line = tsf.linear_curve(times, const, slope, i_sectors)
@@ -379,7 +407,10 @@ def plot_lc_timings_harmonics(times, signal, p_orb, timings, depths, timings_err
     """Shows an overview of the eclipses over one period with the first and
     last contact points as well as minima indicated.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> master
 
     Parameters
     ----------
@@ -430,7 +461,10 @@ def plot_lc_timings_harmonics(times, signal, p_orb, timings, depths, timings_err
     Returns
     -------
     None
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
     """
     t_1, t_2, t_1_1, t_1_2, t_2_1, t_2_2, t_b_1_1, t_b_1_2, t_b_2_1, t_b_2_2 = timings
     t_1_err, t_2_err, t_1_1_err, t_1_2_err, t_2_1_err, t_2_2_err = timings_err[:6]
@@ -556,7 +590,10 @@ def plot_lc_derivatives(p_orb, f_h, a_h, ph_h, ecl_indices, save_file=None, show
     """Shows the light curve and three time derivatives with the significant
     points on the curves used to identify the eclipses
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> master
 
     Parameters
     ----------
@@ -578,7 +615,10 @@ def plot_lc_derivatives(p_orb, f_h, a_h, ph_h, ecl_indices, save_file=None, show
     Returns
     -------
     None
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
     """
     harmonics, harmonic_n = af.find_harmonics_from_pattern(f_h, p_orb, f_tol=1e-9)
     if (len(f_h) > 0):
@@ -742,7 +782,10 @@ def plot_lc_empirical_model(times, signal, p_orb, timings, depths, const, slope,
                             heights_em, timings_err, depths_err, i_sectors, save_file=None, show=True):
     """Shows the initial and final simple empirical function eclipse model
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> master
 
     Parameters
     ----------
@@ -793,7 +836,10 @@ def plot_lc_empirical_model(times, signal, p_orb, timings, depths, const, slope,
     Returns
     -------
     None
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
     """
     # unpack/define parameters
     t_zero_init = timings[0]
@@ -952,8 +998,11 @@ def plot_dists_eclipse_parameters(e, w, i, r_sum, r_rat, sb_rat, e_vals, w_vals,
     and the hdi_prob=0.683 and hdi_prob=0.997 bounds resulting from the HDIs
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     Note: produces several plots
 =======
+=======
+>>>>>>> master
     Parameters
     ----------
     e: float
@@ -988,7 +1037,10 @@ def plot_dists_eclipse_parameters(e, w, i, r_sum, r_rat, sb_rat, e_vals, w_vals,
     Notes
     -----
     produces several plots
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
     """
     cos_w = np.cos(w)
     sin_w = np.sin(w)
@@ -1231,9 +1283,12 @@ def plot_dists_eclipse_parameters(e, w, i, r_sum, r_rat, sb_rat, e_vals, w_vals,
 def plot_corner_eclipse_elements(p_orb, timings, depths, ecl_par, dists_in, dists_out, save_file=None, show=True):
     """Shows the corner plots resulting from the input distributions
 <<<<<<< HEAD
+<<<<<<< HEAD
     
     Note: produces several plots
 =======
+=======
+>>>>>>> master
 
     Parameters
     ----------
@@ -1263,7 +1318,10 @@ def plot_corner_eclipse_elements(p_orb, timings, depths, ecl_par, dists_in, dist
     Notes
     -----
     produces several plots
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
     """
     r2d = 180 / np.pi  # radians to degrees
     t_1, t_2, t_1_1, t_1_2, t_2_1, t_2_2, t_b_1_1, t_b_1_2, t_b_2_1, t_b_2_2 = timings
@@ -1373,7 +1431,10 @@ def plot_lc_model_sigma(times, signal, p_orb, t_zero, timings, const, slope, f_n
     """Shows the difference one parameter makes in the eclipse model
     for three different values
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> master
 
     Parameters
     ----------
@@ -1418,7 +1479,10 @@ def plot_lc_model_sigma(times, signal, p_orb, t_zero, timings, const, slope, f_n
     Returns
     -------
     None
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
     """
     t_1, t_2, t_1_1, t_1_2, t_2_1, t_2_2, t_b_1_1, t_b_1_2, t_b_2_1, t_b_2_2 = timings
     # make the model times array, one full period plus the primary eclipse halves
@@ -1494,7 +1558,10 @@ def plot_lc_physical_model(times, signal, p_orb, t_zero, const_r, slope_r, f_n_r
     of orbital parameters using both the eclipse timings and the ellc light curve
     models over two consecutive fits.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> master
 
     Parameters
     ----------
@@ -1534,7 +1601,10 @@ def plot_lc_physical_model(times, signal, p_orb, t_zero, const_r, slope_r, f_n_r
     Returns
     -------
     None
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
     """
     t_mean = np.mean(times)
     # eclipse signal with disentangled frequencies
@@ -1583,7 +1653,10 @@ def plot_lc_physical_model_h(times, signal, p_orb, t_zero, timings_init, timings
     of orbital parameters using both the eclipse timings and the ellc light curve
     models over two consecutive fits.
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> master
 
     Parameters
     ----------
@@ -1631,7 +1704,10 @@ def plot_lc_physical_model_h(times, signal, p_orb, t_zero, timings_init, timings
     Returns
     -------
     None
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
     """
     timings_init = timings_init - timings_init[0]
     t_1, t_2, t_1_1, t_1_2, t_2_1, t_2_2, t_b_1_1, t_b_1_2, t_b_2_1, t_b_2_2 = timings - t_zero
@@ -1720,11 +1796,14 @@ def plot_lc_physical_model_h(times, signal, p_orb, t_zero, timings_init, timings
 
 def plot_pd_leftover_sinusoids(times, signal, p_orb, t_zero, const_r, slope_r, f_n_r, a_n_r, ph_n_r, passed_r,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                param_lc, i_sectors, sn_thr, model='simple', save_file=None, show=True):
     """Shows an overview of the eclipses over one period with the determination
     of orbital parameters using both the eclipse timings and the ellc light curve
     models over two consecutive fits.
 =======
+=======
+>>>>>>> master
                                param_lc, i_sectors, model='simple', save_file=None, show=True):
     """Shows an overview of the eclipses over one period with the determination
     of orbital parameters using both the eclipse timings and the ellc light curve
@@ -1770,7 +1849,10 @@ def plot_pd_leftover_sinusoids(times, signal, p_orb, t_zero, const_r, slope_r, f
     Returns
     -------
     None
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
     """
     # convert bool mask to indices
     passed_r_i = np.arange(len(f_n_r))[passed_r]
@@ -1792,6 +1874,7 @@ def plot_pd_leftover_sinusoids(times, signal, p_orb, t_zero, const_r, slope_r, f
     freq_range = np.ptp(freqs)
     freqs_1, ampls_1 = tsf.astropy_scargle(times, full_resid)
 <<<<<<< HEAD
+<<<<<<< HEAD
     if float(sn_thr) == -1 :
         snr_threshold = ut.signal_to_noise_threshold(times)
     else :
@@ -1799,6 +1882,9 @@ def plot_pd_leftover_sinusoids(times, signal, p_orb, t_zero, const_r, slope_r, f
 =======
     snr_threshold = ut.signal_to_noise_threshold(len(signal))
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+    snr_threshold = ut.signal_to_noise_threshold(len(signal))
+>>>>>>> master
     noise_spectrum = tsf.scargle_noise_spectrum(times, full_resid)
     # plot
     fig, ax = plt.subplots()
@@ -1830,8 +1916,11 @@ def plot_pd_leftover_sinusoids(times, signal, p_orb, t_zero, const_r, slope_r, f
 def plot_corner_eclipse_mcmc(inf_data, ecosw, esinw, cosi, phi_0, r_rat, sb_rat, const, slope, f_n, a_n, ph_n,
                              save_file=None, show=True):
 <<<<<<< HEAD
+<<<<<<< HEAD
     """Show the pymc3 physical eclipse parameter sampling results in two corner plots"""
 =======
+=======
+>>>>>>> master
     """Show the pymc3 physical eclipse parameter sampling results in two corner plots
 
     Parameters
@@ -1869,7 +1958,10 @@ def plot_corner_eclipse_mcmc(inf_data, ecosw, esinw, cosi, phi_0, r_rat, sb_rat,
     -------
     None
     """
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
     # stacked parameter chains
     const_ch = inf_data.posterior.const.stack(dim=['chain', 'draw']).to_numpy()
     slope_ch = inf_data.posterior.slope.stack(dim=['chain', 'draw']).to_numpy()
@@ -1950,8 +2042,11 @@ def plot_corner_eclipse_mcmc(inf_data, ecosw, esinw, cosi, phi_0, r_rat, sb_rat,
 
 def plot_trace_sinusoids(inf_data, const, slope, f_n, a_n, ph_n):
 <<<<<<< HEAD
+<<<<<<< HEAD
     """Show the pymc3 sampling results in a trace plot"""
 =======
+=======
+>>>>>>> master
     """Show the pymc3 sampling results in a trace plot
 
     Parameters
@@ -1973,7 +2068,10 @@ def plot_trace_sinusoids(inf_data, const, slope, f_n, a_n, ph_n):
     -------
     None
     """
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
     # convert phases to interval [-pi, pi] from [0, 2pi]
     above_pi = (ph_n >= np.pi)
     ph_n[above_pi] = ph_n[above_pi] - 2 * np.pi
@@ -1984,8 +2082,11 @@ def plot_trace_sinusoids(inf_data, const, slope, f_n, a_n, ph_n):
 
 def plot_pair_harmonics(inf_data, p_orb, const, slope, f_n, a_n, ph_n, save_file=None, show=True):
 <<<<<<< HEAD
+<<<<<<< HEAD
     """Show the pymc3 sampling results in several pair plots"""
 =======
+=======
+>>>>>>> master
     """Show the pymc3 sampling results in several pair plots
 
     Parameters
@@ -2013,7 +2114,10 @@ def plot_pair_harmonics(inf_data, p_orb, const, slope, f_n, a_n, ph_n, save_file
     -------
     None
     """
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
     # convert phases to interval [-pi, pi] from [0, 2pi]
     above_pi = (ph_n >= np.pi)
     ph_n[above_pi] = ph_n[above_pi] - 2 * np.pi
@@ -2040,8 +2144,11 @@ def plot_pair_harmonics(inf_data, p_orb, const, slope, f_n, a_n, ph_n, save_file
 
 def plot_trace_harmonics(inf_data, p_orb, const, slope, f_n, a_n, ph_n):
 <<<<<<< HEAD
+<<<<<<< HEAD
     """Show the pymc3 sampling results in a trace plot"""
 =======
+=======
+>>>>>>> master
     """Show the pymc3 sampling results in a trace plot
 
     Parameters
@@ -2065,7 +2172,10 @@ def plot_trace_harmonics(inf_data, p_orb, const, slope, f_n, a_n, ph_n):
     -------
     None
     """
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
     # convert phases to interval [-pi, pi] from [0, 2pi]
     above_pi = (ph_n >= np.pi)
     ph_n[above_pi] = ph_n[above_pi] - 2 * np.pi
@@ -2081,8 +2191,11 @@ def plot_trace_harmonics(inf_data, p_orb, const, slope, f_n, a_n, ph_n):
 def plot_pair_eclipse(inf_data, ecosw, esinw, cosi, phi_0, log_rr, log_sb, const, slope, f_n, a_n, ph_n,
                       save_file=None, show=True):
 <<<<<<< HEAD
+<<<<<<< HEAD
     """Show the pymc3 sampling results in several pair plots"""
 =======
+=======
+>>>>>>> master
     """Show the pymc3 sampling results in several pair plots
 
     Parameters
@@ -2120,7 +2233,10 @@ def plot_pair_eclipse(inf_data, ecosw, esinw, cosi, phi_0, log_rr, log_sb, const
     -------
     None
     """
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
     # convert phases to interval [-pi, pi] from [0, 2pi]
     above_pi = (ph_n >= np.pi)
     ph_n[above_pi] = ph_n[above_pi] - 2 * np.pi
@@ -2148,8 +2264,11 @@ def plot_pair_eclipse(inf_data, ecosw, esinw, cosi, phi_0, log_rr, log_sb, const
 
 def plot_trace_eclipse(inf_data, t_zero, ecosw, esinw, cosi, phi_0, log_rr, log_sb, const, slope, f_n, a_n, ph_n):
 <<<<<<< HEAD
+<<<<<<< HEAD
     """Show the pymc3 sampling results in a trace plot"""
 =======
+=======
+>>>>>>> master
     """Show the pymc3 sampling results in a trace plot
 
     Parameters
@@ -2185,7 +2304,10 @@ def plot_trace_eclipse(inf_data, t_zero, ecosw, esinw, cosi, phi_0, log_rr, log_
     -------
     None
     """
+<<<<<<< HEAD
 >>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
+=======
+>>>>>>> master
     # convert phases to interval [-pi, pi] from [0, 2pi]
     above_pi = (ph_n >= np.pi)
     ph_n[above_pi] = ph_n[above_pi] - 2 * np.pi

@@ -26,11 +26,7 @@ for more information.
 * This algorithm has been documented, tested and applied in the publication: [link](link)
 
 
-<<<<<<< HEAD
-![Example of an analysed EB light curve](./data/sim_042_lc_readme_img.png?raw=true)
-=======
 ![Example of an analysed EB light curve](star_shadow/data/sim_042_lc_readme_img.png?raw=true)
->>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
 
 ## Getting started
 
@@ -100,15 +96,10 @@ frequencies were extracted, the period is too long for the given data set, not e
 or primary or secondary eclipse cannot be identified.
 
 Each step produces at least an .hdf5 file with all the model parameters from that stage of the analysis. 
-<<<<<<< HEAD
-The utility module contains a function for reading these files, as well as a function that translates them into
-several .csv files. The .nc4 files (a wrapper for hdf5) contain pymc3 sampling chains.
-=======
 The utility module contains a function for reading these files, 'read_parameters_hdf5', which outputs a convenient 
 format for the data (note that reading in these files with H5py directly will not result in formatting that can be used 
 with the functions of STAR SHADOW). The .hdf5 files can also be translated into several plain text .csv files with 
 'convert_hdf5_to_ascii'. The .nc4 files (a wrapper for hdf5) contain pymc3 sampling chains.
->>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
 
 
 ### Diagnostic plots

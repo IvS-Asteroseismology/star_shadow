@@ -17,21 +17,13 @@ ACRONYM = ('Satellite Time-series Analysis Routine using Sinusoids and Harmonics
 setup(name="star_shadow",
       version=f'{MAJOR}.{MINOR}.{ATTR}',
       author='Luc IJspeert',
-<<<<<<< HEAD
-=======
       url='https://github.com/LucIJspeert/star_shadow',
->>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
       license='GNU General Public License v3.0',
       description=ACRONYM,
       long_description=open('README.md').read(),
       packages=['star_shadow'],
       package_dir={'star_shadow': 'star_shadow'},
-<<<<<<< HEAD
-      package_data={'star_shadow': ['star_shadow/data/tess_sectors.dat', 'star_shadow/data/mpl_stylesheet.dat'
-                                    'star_shadow/data/sim_000_lc.dat']},
-=======
       package_data={'star_shadow': ['data/tess_sectors.dat', 'data/mpl_stylesheet.dat', 'data/sim_000_lc.dat']},
->>>>>>> b0e00e0c4be3a4b2faca0b23498d1af8592f94ce
       include_package_data=True,
       python_requires='>=3.6',
       install_requires=['numpy', 'scipy', 'numba', 'h5py', 'astropy', 'matplotlib', 'arviz', 'corner'],
