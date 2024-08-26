@@ -173,14 +173,14 @@ def bounds_multiplicity_check(bounds, value):
 
 
 @nb.njit(cache=True)
-def signal_to_noise_threshold(n_points):
+def signal_to_noise_threshold(times):
     """Determine the signal-to-noise threshold for accepting frequencies
-    based on the number of points
+    based on the number of points and gaps
     
     Parameters
     ----------
-    n_points: int
-        Number of data points in the time series
+    times: np.ndarray[float]
+        Time of each datapoint in the light curve
     
     Returns
     -------
@@ -192,7 +192,12 @@ def signal_to_noise_threshold(n_points):
     Baran & Koen 2021, eq 6.
     (https://ui.adsabs.harvard.edu/abs/2021AcA....71..113B/abstract)
     """
+    n_points = len(times)
     sn_thr = 1.201 * np.sqrt(1.05 * np.log(n_points) + 7.184)
+    for i in range(1,n_points) :
+        if times[i] - times[i-1] :
+            sn_thr += 0.25
+            break
     sn_thr = np.round(sn_thr, 2)  # round to two decimals
     return sn_thr
 
@@ -1837,7 +1842,7 @@ def save_summary(target_id, save_dir, data_id='none'):
     return None
 
 
-def sequential_plotting(times, signal, i_sectors, target_id, load_dir, save_dir=None, show=True):
+def sequential_plotting(times, signal, i_sectors, target_id, load_dir, sn_thr, save_dir=None, show=True):
     """Due to plotting not working under multiprocessing this function is
     made to make plots after running the analysis in parallel.
     
@@ -1861,6 +1866,8 @@ def sequential_plotting(times, signal, i_sectors, target_id, load_dir, save_dir=
     load_dir: str
         Path to a directory for loading analysis results.
         Will append <target_id> + _analysis automatically
+    sn_thr: float
+        Signal-to-noise threshold for this data set
     save_dir: str, None
         Path to a directory for saving the plots.
         Will append <target_id> + _analysis automatically
@@ -2090,7 +2097,7 @@ def sequential_plotting(times, signal, i_sectors, target_id, load_dir, save_dir=
         else:
             file_name = None
         vis.plot_pd_leftover_sinusoids(times, signal, p_orb_5, t_zero_8, const_8, slope_8, f_n_8, a_n_8, ph_n_8,
-                                       passed_b_9, ecl_par_8, i_sectors, save_file=file_name, show=show)
+                                       passed_b_9, ecl_par_8, i_sectors, sn_thr, save_file=file_name, show=show)
     except NameError:
         pass  # some variable wasn't loaded (file did not exist)
     return None
