@@ -2081,7 +2081,7 @@ def extract_single_narrow(times, signal, f0=0, fn=0, verbose=True):
     return f_final, a_final, ph_final
 
 
-def refine_subset(times, signal, close_f, p_orb, const, slope, f_n, a_n, ph_n, i_sectors, verbose=True):
+def refine_subset(times, signal, close_f, p_orb, const, slope, f_n, a_n, ph_n, i_sectors, bic_thr=2, verbose=True):
     """Refine a subset of frequencies that are within the Rayleigh criterion of each other,
     taking into account (and not changing the frequencies of) harmonics if present.
     
@@ -2109,6 +2109,9 @@ def refine_subset(times, signal, close_f, p_orb, const, slope, f_n, a_n, ph_n, i
         Pair(s) of indices indicating the separately handled timespans
         in the piecewise-linear curve. If only a single curve is wanted,
         set i_sectors = np.array([[0, len(times)]]).
+    bic_thr: float
+        The minimum decrease in BIC by fitting a sinusoid for the signal
+        to be considered significant
     verbose: bool
         If set to True, this function will print some information
     
@@ -2190,7 +2193,7 @@ def refine_subset(times, signal, close_f, p_orb, const, slope, f_n, a_n, ph_n, i
     return const, slope, f_n, a_n, ph_n
 
 
-def extract_sinusoids(times, signal, i_sectors, p_orb=0, f_n=None, a_n=None, ph_n=None, select='hybrid',
+def extract_sinusoids(times, signal, i_sectors, p_orb=0, f_n=None, a_n=None, ph_n=None, select='hybrid', bic_thr=2,
                       verbose=True):
     """Extract all the frequencies from a periodic signal.
 
@@ -2215,6 +2218,9 @@ def extract_sinusoids(times, signal, i_sectors, p_orb=0, f_n=None, a_n=None, ph_
     select: str
         Select the next frequency based on amplitude ('a'),
         signal-to-noise ('sn'), or hybrid ('hybrid') (first a then sn).
+    bic_thr: float
+        The minimum decrease in BIC by fitting a sinusoid for the signal
+        to be considered significant
     verbose: bool
         If set to True, this function will print some information
 
@@ -2305,7 +2311,7 @@ def extract_sinusoids(times, signal, i_sectors, p_orb=0, f_n=None, a_n=None, ph_
         model_sinusoid_r -= sum_sines(times, np.array([f_i]), np.array([a_i]), np.array([ph_i]))
         if (len(close_f) > 1):
             refine_out = refine_subset(times, signal, close_f, p_orb, const, slope, f_n_temp, a_n_temp, ph_n_temp,
-                                       i_sectors, verbose=verbose)
+                                       i_sectors, bic_thr=bic_thr, verbose=verbose)
             const, slope, f_n_temp, a_n_temp, ph_n_temp = refine_out
         # as a last model-refining step, redetermine the constant and slope
         model_sinusoid_n = sum_sines(times, f_n_temp[close_f], a_n_temp[close_f], ph_n_temp[close_f])
@@ -2316,7 +2322,7 @@ def extract_sinusoids(times, signal, i_sectors, p_orb=0, f_n=None, a_n=None, ph_
         n_param = 2 * n_sectors + 1 * (n_harm > 0) + 2 * n_harm + 3 * (n_freq_cur + 1 - n_harm)
         bic = calc_bic(resid, n_param)
         d_bic = bic_prev - bic
-        if (np.round(d_bic, 2) > 2):
+        if (np.round(d_bic, 2) > bic_thr):
             # accept the new frequency
             f_n, a_n, ph_n = np.append(f_n, f_i), np.append(a_n, a_i), np.append(ph_n, ph_i)
             # adjust the shifted frequencies
@@ -2333,7 +2339,7 @@ def extract_sinusoids(times, signal, i_sectors, p_orb=0, f_n=None, a_n=None, ph_
     return const, slope, f_n, a_n, ph_n
 
 
-def extract_harmonics(times, signal, p_orb, i_sectors, f_n=None, a_n=None, ph_n=None, verbose=True):
+def extract_harmonics(times, signal, p_orb, i_sectors, f_n=None, a_n=None, ph_n=None, bic_thr=2, verbose=True):
     """Tries to extract more harmonics from the signal
     
     Parameters
@@ -2354,6 +2360,9 @@ def extract_harmonics(times, signal, p_orb, i_sectors, f_n=None, a_n=None, ph_n=
         Pair(s) of indices indicating the separately handled timespans
         in the piecewise-linear curve. If only a single curve is wanted,
         set i_sectors = np.array([[0, len(times)]]).
+    bic_thr: float
+        The minimum decrease in BIC by fitting a sinusoid for the signal
+        to be considered significant    
     verbose: bool
         If set to True, this function will print some information
     
@@ -2426,7 +2435,7 @@ def extract_harmonics(times, signal, p_orb, i_sectors, f_n=None, a_n=None, ph_n=
         n_param = 2 * n_sectors + 1 * (n_harm_cur > 0) + 2 * n_harm_cur + 3 * (n_freq - n_harm)
         bic = calc_bic(resid, n_param)
         d_bic = bic_prev - bic
-        if (np.round(d_bic, 2) > 2):
+        if (np.round(d_bic, 2) > bic_thr):
             # h_c is accepted, add it to the final list and continue
             bic_prev = bic
             f_n, a_n, ph_n = np.append(f_n, f_c), np.append(a_n, a_c), np.append(ph_n, ph_c)
@@ -2860,7 +2869,7 @@ def reduce_frequencies(times, signal, p_orb, const, slope, f_n, a_n, ph_n, i_sec
     return const, slope, f_n, a_n, ph_n
 
 
-def select_frequencies(times, signal, p_orb, const, slope, f_n, a_n, ph_n, i_sectors, verbose=False):
+def select_frequencies(times, signal, p_orb, const, slope, f_n, a_n, ph_n, i_sectors, sn_thr, verbose=False):
     """Selects the credible frequencies from the given set
     
     Parameters
@@ -2890,6 +2899,8 @@ def select_frequencies(times, signal, p_orb, const, slope, f_n, a_n, ph_n, i_sec
         observation sectors, but taking half the sectors is recommended.
         If only a single curve is wanted, set
         i_half_s = np.array([[0, len(times)]]).
+    sn_thr: float
+        The signal-to-noise ratio an extracted signal must attain to be considered significant
     verbose: bool
         If set to True, this function will print some information
 
@@ -2923,7 +2934,7 @@ def select_frequencies(times, signal, p_orb, const, slope, f_n, a_n, ph_n, i_sec
     remove_sigma = af.remove_insignificant_sigma(f_n, f_n_err, a_n, a_n_err, sigma_a=3, sigma_f=3)
     # apply the signal-to-noise threshold
     noise_at_f = scargle_noise_at_freq(f_n, times, residuals, window_width=1.0)
-    remove_snr = af.remove_insignificant_snr(a_n, noise_at_f, n_points)
+    remove_snr = af.remove_insignificant_snr(a_n, noise_at_f, times, sn_thr)
     # frequencies that pass sigma criteria
     passed_sigma = np.ones(len(f_n), dtype=bool)
     passed_sigma[remove_sigma] = False

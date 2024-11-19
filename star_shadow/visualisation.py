@@ -1672,7 +1672,7 @@ def plot_lc_physical_model_h(times, signal, p_orb, t_zero, timings_init, timings
 
 
 def plot_pd_leftover_sinusoids(times, signal, p_orb, t_zero, const_r, slope_r, f_n_r, a_n_r, ph_n_r, passed_r,
-                               param_lc, i_sectors, model='simple', save_file=None, show=True):
+                               param_lc, i_sectors, sn_thr, model='simple', save_file=None, show=True):
     """Shows an overview of the eclipses over one period with the determination
     of orbital parameters using both the eclipse timings and the ellc light curve
     models over two consecutive fits.
@@ -1701,6 +1701,8 @@ def plot_pd_leftover_sinusoids(times, signal, p_orb, t_zero, const_r, slope_r, f
         Indices of frequencies passing criteria
     param_lc: numpy.ndarray[float]
         Parameters for the eclipse model
+   sn_thr: float
+        Signal-to-noise threshold for this data set
     i_sectors: numpy.ndarray[int]
         Pair(s) of indices indicating the separately handled timespans
         in the piecewise-linear curve. These can indicate the TESS
@@ -1737,7 +1739,10 @@ def plot_pd_leftover_sinusoids(times, signal, p_orb, t_zero, const_r, slope_r, f
     freqs, ampls = tsf.astropy_scargle(times, ecl_resid)
     freq_range = np.ptp(freqs)
     freqs_1, ampls_1 = tsf.astropy_scargle(times, full_resid)
-    snr_threshold = ut.signal_to_noise_threshold(len(signal))
+    if float(sn_thr) == -1 :
+        snr_threshold = ut.signal_to_noise_threshold(times)
+    else :
+        snr_threshold = float(sn_thr)
     noise_spectrum = tsf.scargle_noise_spectrum(times, full_resid)
     # plot
     fig, ax = plt.subplots()
