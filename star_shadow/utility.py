@@ -1878,7 +1878,7 @@ def save_summary(target_id, save_dir, data_id='none'):
     return None
 
 
-def sequential_plotting(times, signal, signal_err, i_sectors, target_id, load_dir, sn_thr, save_dir=None, show=True):
+def sequential_plotting(times, signal, signal_err, i_sectors, target_id, load_dir, sn_thr=-1, sn_thr_punish_gap=False, save_dir=None, show=True):
     """Due to plotting not working under multiprocessing this function is
     made to make plots after running the analysis in parallel.
 
@@ -1905,7 +1905,10 @@ def sequential_plotting(times, signal, signal_err, i_sectors, target_id, load_di
         Path to a directory for loading analysis results.
         Will append <target_id> + _analysis automatically
     sn_thr: float
-        Threshold for signal-to-noise ratio for a signal to be accepted as signficant
+		Threshold for signal-to-noise ratio for a signal to be accepted as signficant.
+	sn_thr_punish_gap: bool
+        Whether to increase the SNR threshold by 0.25 if there is at least one sector-long gap.
+        Only relevant if sn_thr == -1
     save_dir: str, None
         Path to a directory for saving the plots.
         Will append <target_id> + _analysis automatically
@@ -2135,7 +2138,7 @@ def sequential_plotting(times, signal, signal_err, i_sectors, target_id, load_di
         else:
             file_name = None
         vis.plot_pd_leftover_sinusoids(times, signal, p_orb_5, t_zero_8, const_8, slope_8, f_n_8, a_n_8, ph_n_8,
-                                       passed_b_9, ecl_par_8, i_sectors, sn_thr, save_file=file_name, show=show)
+                                       passed_b_9, ecl_par_8, i_sectors, sn_thr, sn_thr_punish_gap, save_file=file_name, show=show)
     except NameError:
         pass  # some variable wasn't loaded (file did not exist)
     return None

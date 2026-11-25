@@ -1677,7 +1677,7 @@ def plot_lc_physical_model_h(times, signal, p_orb, t_zero, timings_init, timings
 
 
 def plot_pd_leftover_sinusoids(times, signal, p_orb, t_zero, const_r, slope_r, f_n_r, a_n_r, ph_n_r, passed_r,
-                               param_lc, i_sectors, sn_thr, model='simple', save_file=None, show=True):
+                               param_lc, i_sectors, sn_thr, sn_thr_punish_gap, model='simple', save_file=None, show=True):
     """Shows an overview of the eclipses over one period with the determination
     of orbital parameters using both the eclipse timings and the ellc light curve
     models over two consecutive fits.
@@ -1714,6 +1714,9 @@ def plot_pd_leftover_sinusoids(times, signal, p_orb, t_zero, const_r, slope_r, f
         i_half_s = np.array([[0, len(times)]]).
     sn_thr: float
         Threshold for signal-to-noise ratio for a signal to be accepted as signficant
+    sn_thr_punish_gap: bool
+        Whether to increase the SNR threshold by 0.25 if there is at least one sector-long gap.
+        Only relevant if sn_thr == -1
     model: str, optional
         Model to use for the eclipse ('simple' or 'ellc')
     save_file: str, optional
@@ -1745,7 +1748,7 @@ def plot_pd_leftover_sinusoids(times, signal, p_orb, t_zero, const_r, slope_r, f
     freq_range = np.ptp(freqs)
     freqs_1, ampls_1 = tsf.astropy_scargle(times, full_resid)
     if float(sn_thr) == -1 :
-        snr_threshold = ut.signal_to_noise_threshold(times)
+        snr_threshold = ut.signal_to_noise_threshold(times, sn_thr_punish_gap)
     else :
         snr_threshold = float(sn_thr)
     noise_spectrum = tsf.scargle_noise_spectrum(times, full_resid)
